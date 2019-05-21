@@ -6,9 +6,11 @@ import java.util.Random;
 public class Player extends GameObject {
 
     Random rand = new Random();
+    Handler handler;
 
-    public Player(int x, int y, ID id) {
+    public Player(int x, int y, ID id, Handler handler) {
         super(x, y, id);
+        this.handler = handler;
     }
 
     @Override
@@ -18,11 +20,30 @@ public class Player extends GameObject {
 
         x = Game.clamp(x, 0, Game.WIDTH-37);
         y = Game.clamp(y, 0, Game.HEIGHT-60);
+        
+        collision();
+    }
+
+    private void collision() {
+        for (int i = 0; i < handler.objects.size(); i++){
+            GameObject temp = handler.objects.get(i);
+            if (temp.getId() == ID.BasicEenemy){
+                if (getBounds().intersects(temp.getBounds())){
+                    //Collision code
+                    HUD.HEALTH -= 2;
+                }
+            }
+        }
     }
 
     @Override
     public void render(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(x, y, 32, 32);
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, 32,32);
     }
 }
