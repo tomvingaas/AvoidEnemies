@@ -8,7 +8,7 @@ public class Player extends GameObject {
     Random rand = new Random();
     Handler handler;
 
-    public Player(int x, int y, ID id, Handler handler) {
+    public Player(float x, float y, ID id, Handler handler) {
         super(x, y, id);
         this.handler = handler;
     }
@@ -18,8 +18,8 @@ public class Player extends GameObject {
         x += velX;
         y += velY;
 
-        x = Game.clamp(x, 0, Game.WIDTH-37);
-        y = Game.clamp(y, 0, Game.HEIGHT-60);
+        x = Game.clamp((int)x, 0, Game.WIDTH-37);
+        y = Game.clamp((int)y, 0, Game.HEIGHT-60);
         
         collision();
 
@@ -29,7 +29,7 @@ public class Player extends GameObject {
     private void collision() {
         for (int i = 0; i < handler.objects.size(); i++){
             GameObject temp = handler.objects.get(i);
-            if (temp.getId() == ID.BasicEenemy || temp.getId() == ID.FastEnemy){
+            if (temp.getId() == ID.BasicEenemy || temp.getId() == ID.FastEnemy || temp.getId() == ID.SmartEnemy){
                 if (getBounds().intersects(temp.getBounds())){
                     //Collision code
                     HUD.HEALTH -= 2;
@@ -41,11 +41,11 @@ public class Player extends GameObject {
     @Override
     public void render(Graphics g) {
         g.setColor(Color.WHITE);
-        g.fillRect(x, y, 32, 32);
+        g.fillRect((int)x, (int)y, 32, 32);
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 32,32);
+        return new Rectangle((int)x, (int) y, 32,32);
     }
 }
