@@ -22,12 +22,14 @@ public class Player extends GameObject {
         y = Game.clamp(y, 0, Game.HEIGHT-60);
         
         collision();
+
+        handler.addObject(new Trail(x, y, ID.Trail, Color.WHITE,32,32, 0.08f, handler));
     }
 
     private void collision() {
         for (int i = 0; i < handler.objects.size(); i++){
             GameObject temp = handler.objects.get(i);
-            if (temp.getId() == ID.BasicEenemy){
+            if (temp.getId() == ID.BasicEenemy || temp.getId() == ID.FastEnemy){
                 if (getBounds().intersects(temp.getBounds())){
                     //Collision code
                     HUD.HEALTH -= 2;

@@ -16,6 +16,7 @@ public class Game extends Canvas implements Runnable {
     private Random rand;
     private Handler handler;
     private HUD hud;
+    private Spawn spawn;
 
     public Game(){
         handler = new Handler();
@@ -23,13 +24,12 @@ public class Game extends Canvas implements Runnable {
 
         new Window(WIDTH, HEIGHT, "Game", this);
         hud = new HUD();
+        spawn = new Spawn(handler, hud);
 
         rand = new Random();
 
         handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 -32, ID.Player, handler));
-        for (int i =0; i< 5; i++){
-            handler.addObject(new BasicEnemy(rand.nextInt(WIDTH), rand.nextInt(HEIGHT), ID.BasicEenemy, handler));
-        }
+        handler.addObject(new BasicEnemy(rand.nextInt(Game.WIDTH), rand.nextInt(Game.HEIGHT), ID.BasicEenemy, handler));
 
     }
 
@@ -51,12 +51,14 @@ public class Game extends Canvas implements Runnable {
     @Override
     public void run(){
         this.requestFocus();
+
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = System.currentTimeMillis();
         int frames = 0;
+
         while(running){
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -81,6 +83,8 @@ public class Game extends Canvas implements Runnable {
     private void tick(){
         handler.tick();
         hud.tick();
+        spawn.tick();
+
     }
 
     private void render(){
