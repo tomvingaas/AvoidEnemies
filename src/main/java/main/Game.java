@@ -24,8 +24,11 @@ public class Game extends Canvas implements Runnable {
 
         rand = new Random();
 
-            handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 -32, ID.Player));
-        handler.addObject(new Player(WIDTH / 2 + 64, HEIGHT / 2 -32, ID.Player2));
+        handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 -32, ID.Player));
+        for (int i =0; i< 20; i++){
+            handler.addObject(new BasicEnemy(rand.nextInt(WIDTH), rand.nextInt(HEIGHT), ID.BasicEenemy));
+        }
+//        handler.addObject(new Player(WIDTH / 2 + 64, HEIGHT / 2 -32, ID.Player2));
 
     }
 
@@ -93,6 +96,16 @@ public class Game extends Canvas implements Runnable {
 
         g.dispose();
         bs.show();
+    }
+
+    public static int clamp(int var, int min, int max){
+        if (var >= max){
+            return var = max;
+        }else if( var <= min) {
+            return var = min;
+        }else{
+            return var;
+        }
     }
 
     public static void main(String[] args) {

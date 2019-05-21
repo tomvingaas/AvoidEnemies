@@ -32,22 +32,12 @@ public class KeyInput extends KeyAdapter {
                     object.setVelX(-5);
                 }
             }
-
-            if (object.getId().equals(ID.Player2)){
-                if (key == KeyEvent.VK_UP){
-                    object.setVelY(-5);
-                }
-                if (key == KeyEvent.VK_DOWN){
-                    object.setVelY(5);
-                }
-                if (key == KeyEvent.VK_RIGHT){
-                    object.setVelX(5);
-                }
-                if (key == KeyEvent.VK_LEFT){
-                    object.setVelX(-5);
-                }
-            }
         }
+
+        if (key == KeyEvent.VK_ESCAPE){
+            System.exit(1);
+        }
+
     }
 
     @Override
@@ -71,20 +61,20 @@ public class KeyInput extends KeyAdapter {
                 }
             }
 
-            if (object.getId().equals(ID.Player2)){
-                if (key == KeyEvent.VK_UP){
-                    object.setVelY(0);
-                }
-                if (key == KeyEvent.VK_DOWN){
-                    object.setVelY(0);
-                }
-                if (key == KeyEvent.VK_RIGHT){
-                    object.setVelX(0);
-                }
-                if (key == KeyEvent.VK_LEFT){
-                    object.setVelX(0);
-                }
-            }
+//            if (object.getId().equals(ID.Player2)){
+//                if (key == KeyEvent.VK_UP){
+//                    object.setVelY(0);
+//                }
+//                if (key == KeyEvent.VK_DOWN){
+//                    object.setVelY(0);
+//                }
+//                if (key == KeyEvent.VK_RIGHT){
+//                    object.setVelX(0);
+//                }
+//                if (key == KeyEvent.VK_LEFT){
+//                    object.setVelX(0);
+//                }
+//            }
         }
 
     }
