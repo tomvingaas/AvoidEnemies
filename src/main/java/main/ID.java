@@ -3,8 +3,9 @@ package main;
 public enum ID {
     Player(),
 //    Player2(),
-    BasicEenemy(),
+    BasicEnemy(),
     FastEnemy(),
     SmartEnemy(),
-    Trail()
+    Trail(),
+    BossEnemy()
 }

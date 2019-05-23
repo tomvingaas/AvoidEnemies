@@ -17,19 +17,31 @@ public class Game extends Canvas implements Runnable {
     private Handler handler;
     private HUD hud;
     private Spawn spawn;
+    private Menu menu;
+
+    public enum STATE{
+        MENU,
+        GAME,
+        HELP,
+    }
+
+    public STATE gameState = STATE.MENU;
 
     public Game(){
         handler = new Handler();
+        menu = new Menu(handler,this);
         this.addKeyListener(new KeyInput(handler));
+        this.addMouseListener(menu);
 
         new Window(WIDTH, HEIGHT, "Game", this);
         hud = new HUD();
         spawn = new Spawn(handler, hud);
-
         rand = new Random();
 
-        handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 -32, ID.Player, handler));
-        handler.addObject(new BasicEnemy(rand.nextInt(Game.WIDTH), rand.nextInt(Game.HEIGHT), ID.BasicEenemy, handler));
+
+
+
+
 
     }
 
@@ -82,8 +94,14 @@ public class Game extends Canvas implements Runnable {
 
     private void tick(){
         handler.tick();
-        hud.tick();
-        spawn.tick();
+
+        if (gameState == STATE.GAME){
+            hud.tick();
+            spawn.tick();
+        }else if (gameState == STATE.MENU){
+            menu.tick();
+        }
+
 
     }
 
@@ -100,8 +118,12 @@ public class Game extends Canvas implements Runnable {
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         handler.render(g);
-        hud.render(g);
 
+        if (gameState == STATE.GAME){
+            hud.render(g);
+        }else if (gameState == STATE.MENU || gameState == STATE.HELP){
+            menu.render(g);
+        }
         g.dispose();
         bs.show();
     }

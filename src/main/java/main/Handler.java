@@ -10,7 +10,6 @@ public class Handler {
     public void tick(){
         for(int i =0; i < objects.size(); i++){
             GameObject tempObject = objects.get(i);
-
             tempObject.tick();
         }
     }
@@ -18,8 +17,17 @@ public class Handler {
     public void render(Graphics g){
         for(int i =0; i < objects.size(); i++){
             GameObject tempObject = objects.get(i);
-
             tempObject.render(g);
+        }
+    }
+
+    public void clearEnemies(){
+        for(int i =0; i < objects.size(); i++){
+            GameObject tempObject = objects.get(i);
+            if (tempObject.getId() != ID.Player){
+                removeObject(tempObject);
+                i--;
+            }
         }
     }
 
