@@ -1,12 +1,3 @@
 language: java
-
-./gradlew assemble
-./gradlew check
-
-
 jdk:
   - openjdk11
-  
-  
-script:
-  - ./gradlew test
