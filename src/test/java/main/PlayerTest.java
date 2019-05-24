@@ -10,9 +10,4 @@ public class PlayerTest {
     public void testPassed() {
         System.out.println("test er fin!");
     }
-
-    @Test
-    public void testFailed() {
-        fail();
-    }
 }
