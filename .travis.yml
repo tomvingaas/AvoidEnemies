@@ -3,6 +3,9 @@ language: java
 ./gradlew assemble
 ./gradlew check
 
+before_install:
+  - chmod +x gradlew
+
 
 jdk:
   - openjdk11
