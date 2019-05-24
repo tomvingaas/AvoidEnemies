@@ -1,0 +1,8 @@
+language: java
+
+./gradlew assemble
+./gradlew check
+
+
+jdk:
+  - openjdk11
